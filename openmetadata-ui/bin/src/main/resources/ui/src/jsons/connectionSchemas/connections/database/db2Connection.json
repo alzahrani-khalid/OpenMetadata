@@ -1,0 +1,122 @@
+{
+  "$id": "https://open-metadata.org/schema/entity/services/connections/database/db2Connection.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Db2Connection",
+  "description": "Db2 Connection Config",
+  "type": "object",
+  "javaType": "org.openmetadata.schema.services.connections.database.Db2Connection",
+  "definitions": {
+    "db2Type": {
+      "description": "Service type.",
+      "type": "string",
+      "enum": [
+        "Db2"
+      ],
+      "default": "Db2"
+    },
+    "db2Scheme": {
+      "description": "SQLAlchemy driver scheme options.",
+      "type": "string",
+      "enum": [
+        "db2+ibm_db"
+      ],
+      "default": "db2+ibm_db"
+    }
+  },
+  "properties": {
+    "type": {
+      "title": "Service Type",
+      "description": "Service Type",
+      "default": "Db2",
+      "type": "string",
+      "enum": [
+        "Db2"
+      ]
+    },
+    "scheme": {
+      "title": "Connection Scheme",
+      "description": "SQLAlchemy driver scheme options.",
+      "default": "db2+ibm_db",
+      "type": "string",
+      "enum": [
+        "db2+ibm_db"
+      ]
+    },
+    "username": {
+      "title": "Username",
+      "description": "Username to connect to DB2. This user should have privileges to read all the metadata in DB2.",
+      "type": "string"
+    },
+    "password": {
+      "title": "Password",
+      "description": "Password to connect to DB2.",
+      "type": "string",
+      "format": "password"
+    },
+    "hostPort": {
+      "title": "Host and Port",
+      "description": "Host and port of the DB2 service.",
+      "type": "string"
+    },
+    "database": {
+      "title": "database",
+      "description": "Database of the data source.",
+      "type": "string"
+    },
+    "connectionOptions": {
+      "title": "Connection Options",
+      "javaType": "org.openmetadata.schema.services.connections.database.ConnectionOptions",
+      "description": "Additional connection options to build the URL that can be sent to service during the connection.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "connectionArguments": {
+      "title": "Connection Arguments",
+      "javaType": "org.openmetadata.schema.services.connections.database.ConnectionArguments",
+      "description": "Additional connection arguments such as security or protocol configs that can be sent to service during connection.",
+      "type": "object",
+      "additionalProperties": {
+        ".{1,}": {
+          "type": "string"
+        }
+      }
+    },
+    "supportsMetadataExtraction": {
+      "title": "Supports Metadata Extraction",
+      "description": "Supports Metadata Extraction.",
+      "type": "boolean",
+      "default": true
+    },
+    "supportsDBTExtraction": {
+      "description": "Supports DBT Extraction.",
+      "type": "boolean",
+      "default": true
+    },
+    "supportsProfiler": {
+      "title": "Supports Profiler",
+      "description": "Supports Profiler",
+      "type": "boolean",
+      "default": true
+    },
+    "supportsDatabase": {
+      "title": "Supports Database",
+      "description": "The source service supports the database concept in its hierarchy",
+      "type": "boolean",
+      "default": true
+    },
+    "supportsQueryComment": {
+      "title": "Supports Query Comment",
+      "description": "For Database Services using SQLAlchemy, True to enable running a comment for all queries run from OpenMetadata.",
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "hostPort",
+    "username",
+    "database"
+  ]
+}

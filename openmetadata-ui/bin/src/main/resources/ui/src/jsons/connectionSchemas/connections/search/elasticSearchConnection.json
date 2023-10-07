@@ -1,0 +1,138 @@
+{
+  "$id": "https://open-metadata.org/schema/entity/services/connections/search/elasticSearchConnection.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ElasticSearch Connection",
+  "description": "ElasticSearch Connection.",
+  "type": "object",
+  "javaType": "org.openmetadata.schema.services.connections.search.ElasticSearchConnection",
+  "definitions": {
+    "elasticSearchType": {
+      "description": "ElasticSearch service type",
+      "type": "string",
+      "enum": [
+        "ElasticSearch"
+      ],
+      "default": "ElasticSearch"
+    },
+    "basicAuthentication": {
+      "title": "Basic Authentication",
+      "properties": {
+        "username": {
+          "title": "Username",
+          "description": "Elastic Search Username for Login",
+          "type": "string"
+        },
+        "password": {
+          "title": "Password",
+          "description": "Elastic Search Password for Login",
+          "type": "string",
+          "format": "password"
+        }
+      },
+      "type": "object"
+    },
+    "apiAuthentication": {
+      "title": "API Key Authentication",
+      "type": "object",
+      "properties": {
+        "apiKey": {
+          "title": "API Key",
+          "description": "Elastic Search API Key for API Authentication",
+          "type": "string",
+          "format": "password"
+        },
+        "apiKeyId": {
+          "title": "API Key ID",
+          "description": "Elastic Search API Key ID for API Authentication",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "properties": {
+    "type": {
+      "title": "ElasticSearch Type",
+      "description": "ElasticSearch Type",
+      "default": "ElasticSearch",
+      "type": "string",
+      "enum": [
+        "ElasticSearch"
+      ]
+    },
+    "hostPort": {
+      "title": "Host and Port",
+      "description": "Host and port of the ElasticSearch service.",
+      "type": "string",
+      "format": "uri"
+    },
+    "authType": {
+      "title": "Auth Configuration Type",
+      "description": "Choose Auth Config Type.",
+      "oneOf": [
+        {
+          "title": "Basic Authentication",
+          "properties": {
+            "username": {
+              "title": "Username",
+              "description": "Elastic Search Username for Login",
+              "type": "string"
+            },
+            "password": {
+              "title": "Password",
+              "description": "Elastic Search Password for Login",
+              "type": "string",
+              "format": "password"
+            }
+          },
+          "type": "object"
+        },
+        {
+          "title": "API Key Authentication",
+          "type": "object",
+          "properties": {
+            "apiKey": {
+              "title": "API Key",
+              "description": "Elastic Search API Key for API Authentication",
+              "type": "string",
+              "format": "password"
+            },
+            "apiKeyId": {
+              "title": "API Key ID",
+              "description": "Elastic Search API Key ID for API Authentication",
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "caCert": {
+      "title": "Client Certificate Path",
+      "description": "Path to CA Cert File",
+      "type": "string"
+    },
+    "connectionTimeoutSecs": {
+      "title": "Connection Timeout in Seconds",
+      "description": "Connection Timeout in Seconds",
+      "type": "integer",
+      "default": 30
+    },
+    "connectionArguments": {
+      "title": "Connection Arguments",
+      "javaType": "org.openmetadata.schema.services.connections.database.ConnectionArguments",
+      "description": "Additional connection arguments such as security or protocol configs that can be sent to service during connection.",
+      "type": "object",
+      "additionalProperties": {
+        ".{1,}": {
+          "type": "string"
+        }
+      }
+    },
+    "supportsMetadataExtraction": {
+      "title": "Supports Metadata Extraction",
+      "description": "Supports Metadata Extraction.",
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,51 @@
+{
+  "$id": "https://open-metadata.org/schema/metadataIngestion/testSuitePipeline.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TestSuitePipeline",
+  "description": "TestSuite Pipeline Configuration.",
+  "type": "object",
+  "definitions": {
+    "testSuiteConfigType": {
+      "description": "Pipeline Source Config Metadata Pipeline type",
+      "type": "string",
+      "enum": [
+        "TestSuite"
+      ],
+      "default": "TestSuite"
+    }
+  },
+  "properties": {
+    "type": {
+      "description": "Pipeline type",
+      "$ref": "#/definitions/testSuiteConfigType",
+      "default": "TestSuite"
+    },
+    "entityFullyQualifiedName": {
+      "description": "Fully qualified name of the entity to be tested.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 3072
+    },
+    "profileSample": {
+      "description": "Percentage of data or no. of rows we want to execute the profiler and tests on",
+      "type": "number",
+      "default": null,
+      "title": "Profile Sample"
+    },
+    "profileSampleType": {
+      "title": "Profile Sample Type",
+      "description": "Type of Profile Sample (percentage or rows)",
+      "type": "string",
+      "enum": [
+        "PERCENTAGE",
+        "ROWS"
+      ],
+      "default": "PERCENTAGE"
+    }
+  },
+  "required": [
+    "type",
+    "entityFullyQualifiedName"
+  ],
+  "additionalProperties": false
+}

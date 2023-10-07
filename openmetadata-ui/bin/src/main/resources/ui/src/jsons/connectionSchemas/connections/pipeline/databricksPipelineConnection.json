@@ -1,0 +1,67 @@
+{
+  "$id": "https://open-metadata.org/schema/entity/services/connections/pipeline/DatabricksPipelineConnection.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DatabricksPipelineConnection",
+  "description": "Databricks Connection Config",
+  "type": "object",
+  "javaType": "org.openmetadata.schema.services.connections.pipeline.DatabricksPipelineConnection",
+  "definitions": {
+    "databricksType": {
+      "description": "Service type.",
+      "type": "string",
+      "enum": [
+        "DatabricksPipeline"
+      ],
+      "default": "DatabricksPipeline"
+    }
+  },
+  "properties": {
+    "type": {
+      "title": "Service Type",
+      "description": "Service Type",
+      "default": "DatabricksPipeline",
+      "type": "string",
+      "enum": [
+        "DatabricksPipeline"
+      ]
+    },
+    "hostPort": {
+      "title": "Host and Port",
+      "description": "Host and port of the Databricks service.",
+      "type": "string"
+    },
+    "token": {
+      "title": "Token",
+      "description": "Generated Token to connect to Databricks.",
+      "type": "string",
+      "format": "password"
+    },
+    "httpPath": {
+      "title": "Http Path",
+      "description": "Databricks compute resources URL.",
+      "type": "string"
+    },
+    "connectionArguments": {
+      "title": "Connection Arguments",
+      "javaType": "org.openmetadata.schema.services.connections.database.ConnectionArguments",
+      "description": "Additional connection arguments such as security or protocol configs that can be sent to service during connection.",
+      "type": "object",
+      "additionalProperties": {
+        ".{1,}": {
+          "type": "string"
+        }
+      }
+    },
+    "supportsMetadataExtraction": {
+      "title": "Supports Metadata Extraction",
+      "description": "Supports Metadata Extraction.",
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "hostPort",
+    "token"
+  ]
+}

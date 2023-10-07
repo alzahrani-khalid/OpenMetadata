@@ -1,0 +1,169 @@
+{
+  "$id": "https://open-metadata.org/schema/entity/services/connections/dashboard/tableauConnection.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TableauConnection",
+  "description": "Tableau Connection Config",
+  "type": "object",
+  "javaType": "org.openmetadata.schema.services.connections.dashboard.TableauConnection",
+  "definitions": {
+    "tableauType": {
+      "description": "Tableau service type",
+      "type": "string",
+      "enum": [
+        "Tableau"
+      ],
+      "default": "Tableau"
+    }
+  },
+  "properties": {
+    "type": {
+      "title": "Service Type",
+      "description": "Service Type",
+      "default": "Tableau",
+      "type": "string",
+      "enum": [
+        "Tableau"
+      ]
+    },
+    "hostPort": {
+      "expose": true,
+      "title": "Host and Port",
+      "description": "Tableau Server.",
+      "type": "string",
+      "format": "uri"
+    },
+    "authType": {
+      "mask": true,
+      "title": "Authentication type for Tableau",
+      "description": "Types of methods used to authenticate to the tableau instance",
+      "oneOf": [
+        {
+          "$id": "https://open-metadata.org/schema/security/credentials/basicAuth.json",
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "title": "BasicAuth",
+          "description": "Basic Auth Credentials",
+          "type": "object",
+          "javaType": "org.openmetadata.schema.security.credentials.BasicAuth",
+          "properties": {
+            "username": {
+              "title": "Username",
+              "description": "Username to access the service.",
+              "type": "string"
+            },
+            "password": {
+              "title": "Password",
+              "description": "Password to access the service.",
+              "type": "string",
+              "format": "password"
+            }
+          },
+          "required": [
+            "username",
+            "password"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "$id": "https://open-metadata.org/schema/security/credentials/accessTokenAuth.json",
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "title": "AccessTokenAuth",
+          "description": "Access Token Auth Credentials",
+          "type": "object",
+          "javaType": "org.openmetadata.schema.security.credentials.AccessTokenAuth",
+          "properties": {
+            "personalAccessTokenName": {
+              "title": "Personal Access Token",
+              "description": "Personal Access Token Name.",
+              "type": "string"
+            },
+            "personalAccessTokenSecret": {
+              "title": "Personal Access Token Secret",
+              "description": "Personal Access Token Secret.",
+              "type": "string",
+              "format": "password"
+            }
+          },
+          "required": [
+            "personalAccessTokenName",
+            "personalAccessTokenSecret"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "apiVersion": {
+      "title": "API Version",
+      "description": "Tableau API version.",
+      "type": "string"
+    },
+    "siteName": {
+      "title": "Site Name",
+      "description": "Tableau Site Name.",
+      "type": "string"
+    },
+    "siteUrl": {
+      "title": "Site Url",
+      "description": "Tableau Site Url.",
+      "type": "string"
+    },
+    "env": {
+      "title": "Tableau Environment",
+      "description": "Tableau Environment Name.",
+      "type": "string",
+      "default": "tableau_prod"
+    },
+    "paginationLimit": {
+      "title": "Pagination Limit",
+      "description": "Pagination limit used while querying the tableau metadata API for getting data sources",
+      "type": "integer",
+      "default": 10
+    },
+    "verifySSL": {
+      "default": "no-ssl",
+      "title": "Verify SSL",
+      "description": "Client SSL verification. Make sure to configure the SSLConfig if enabled.",
+      "javaType": "org.openmetadata.schema.security.ssl.VerifySSL",
+      "type": "string",
+      "enum": [
+        "no-ssl",
+        "ignore",
+        "validate"
+      ]
+    },
+    "sslConfig": {
+      "title": "SSL Config",
+      "description": "Client SSL configuration",
+      "javaType": "org.openmetadata.schema.security.ssl.SSLConfig",
+      "oneOf": [
+        {
+          "$id": "https://open-metadata.org/schema/security/ssl/validateSSLClientConfig.json",
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "title": "Validate SSL Client Config",
+          "description": "OpenMetadata Client configured to validate SSL certificates.",
+          "type": "object",
+          "javaType": "org.openmetadata.schema.security.ssl.ValidateSSLClientConfig",
+          "properties": {
+            "certificatePath": {
+              "title": "Certificate Path",
+              "description": "CA certificate path. E.g., /path/to/public.cert. Will be used if Verify SSL is set to `validate`.",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "supportsMetadataExtraction": {
+      "title": "Supports Metadata Extraction",
+      "description": "Supports Metadata Extraction.",
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "env",
+    "hostPort"
+  ]
+}

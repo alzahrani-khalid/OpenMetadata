@@ -1,0 +1,140 @@
+{
+  "$id": "https://open-metadata.org/schema/entity/services/connections/database/mssqlConnection.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MssqlConnection",
+  "description": "Mssql Database Connection Config",
+  "type": "object",
+  "javaType": "org.openmetadata.schema.services.connections.database.MssqlConnection",
+  "definitions": {
+    "mssqlType": {
+      "description": "Service type.",
+      "type": "string",
+      "enum": [
+        "Mssql"
+      ],
+      "default": "Mssql"
+    },
+    "mssqlScheme": {
+      "description": "SQLAlchemy driver scheme options.",
+      "type": "string",
+      "enum": [
+        "mssql+pyodbc",
+        "mssql+pytds",
+        "mssql+pymssql"
+      ],
+      "default": "mssql+pytds"
+    }
+  },
+  "properties": {
+    "type": {
+      "title": "Service Type",
+      "description": "Service Type",
+      "default": "Mssql",
+      "type": "string",
+      "enum": [
+        "Mssql"
+      ]
+    },
+    "scheme": {
+      "title": "Connection Scheme",
+      "description": "SQLAlchemy driver scheme options.",
+      "default": "mssql+pytds",
+      "type": "string",
+      "enum": [
+        "mssql+pyodbc",
+        "mssql+pytds",
+        "mssql+pymssql"
+      ]
+    },
+    "username": {
+      "title": "Username",
+      "description": "Username to connect to MSSQL. This user should have privileges to read all the metadata in MsSQL.",
+      "type": "string"
+    },
+    "password": {
+      "title": "Password",
+      "description": "Password to connect to MSSQL.",
+      "type": "string",
+      "format": "password"
+    },
+    "hostPort": {
+      "title": "Host and Port",
+      "description": "Host and port of the MSSQL service.",
+      "type": "string"
+    },
+    "database": {
+      "title": "Database",
+      "description": "Database of the data source. This is optional parameter, if you would like to restrict the metadata reading to a single database. When left blank, OpenMetadata Ingestion attempts to scan all the databases.",
+      "type": "string"
+    },
+    "driver": {
+      "title": "Driver",
+      "description": "ODBC driver version in case of pyodbc connection.",
+      "type": "string",
+      "default": "ODBC Driver 18 for SQL Server"
+    },
+    "ingestAllDatabases": {
+      "title": "Ingest All Databases",
+      "description": "Ingest data from all databases in Mssql. You can use databaseFilterPattern on top of this.",
+      "type": "boolean",
+      "default": false
+    },
+    "connectionOptions": {
+      "title": "Connection Options",
+      "javaType": "org.openmetadata.schema.services.connections.database.ConnectionOptions",
+      "description": "Additional connection options to build the URL that can be sent to service during the connection.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "connectionArguments": {
+      "title": "Connection Arguments",
+      "javaType": "org.openmetadata.schema.services.connections.database.ConnectionArguments",
+      "description": "Additional connection arguments such as security or protocol configs that can be sent to service during connection.",
+      "type": "object",
+      "additionalProperties": {
+        ".{1,}": {
+          "type": "string"
+        }
+      }
+    },
+    "supportsMetadataExtraction": {
+      "title": "Supports Metadata Extraction",
+      "description": "Supports Metadata Extraction.",
+      "type": "boolean",
+      "default": true
+    },
+    "supportsDBTExtraction": {
+      "description": "Supports DBT Extraction.",
+      "type": "boolean",
+      "default": true
+    },
+    "supportsProfiler": {
+      "title": "Supports Profiler",
+      "description": "Supports Profiler",
+      "type": "boolean",
+      "default": true
+    },
+    "supportsDatabase": {
+      "title": "Supports Database",
+      "description": "The source service supports the database concept in its hierarchy",
+      "type": "boolean",
+      "default": true
+    },
+    "supportsUsageExtraction": {
+      "description": "Supports Usage Extraction.",
+      "type": "boolean",
+      "default": true
+    },
+    "supportsLineageExtraction": {
+      "description": "Supports Lineage Extraction.",
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "database"
+  ]
+}

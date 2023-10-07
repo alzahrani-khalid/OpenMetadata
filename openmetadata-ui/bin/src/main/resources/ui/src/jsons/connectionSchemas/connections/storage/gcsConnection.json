@@ -1,0 +1,221 @@
+{
+  "$id": "https://open-metadata.org/schema/entity/services/connections/storage/gcsConnection.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GCS Connection",
+  "description": "GCS Connection.",
+  "type": "object",
+  "javaType": "org.openmetadata.schema.services.connections.storage.GcsConnection",
+  "definitions": {
+    "gcsType": {
+      "description": "Gcs service type",
+      "type": "string",
+      "enum": [
+        "GCS"
+      ],
+      "default": "GCS"
+    }
+  },
+  "properties": {
+    "type": {
+      "title": "Service Type",
+      "description": "Service Type",
+      "default": "GCS",
+      "type": "string",
+      "enum": [
+        "GCS"
+      ]
+    },
+    "credentials": {
+      "title": "GCP Credentials",
+      "description": "GCP Credentials",
+      "$id": "https://open-metadata.org/schema/security/credentials/gcpCredentials.json",
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "type": "object",
+      "javaType": "org.openmetadata.schema.security.credentials.GCPCredentials",
+      "definitions": {
+        "gcpCredentialsPath": {
+          "title": "GCP Credentials Path",
+          "description": "Pass the path of file containing the GCP credentials info",
+          "type": "string"
+        },
+        "GCPImpersonateServiceAccountValues": {
+          "title": "GCP impersonate service account values",
+          "description": "Pass the values to impersonate a service account of Google Cloud",
+          "type": "object",
+          "properties": {
+            "impersonateServiceAccount": {
+              "title": "Target Service Account Email",
+              "description": "The impersonated service account email",
+              "type": "string"
+            },
+            "lifetime": {
+              "title": "Lifetime",
+              "description": "Number of seconds the delegated credential should be valid",
+              "type": "integer",
+              "default": 3600
+            }
+          }
+        }
+      },
+      "properties": {
+        "gcpConfig": {
+          "title": "GCP Credentials Configuration",
+          "description": "We support two ways of authenticating to GCP i.e via GCP Credentials Values or GCP Credentials Path",
+          "oneOf": [
+            {
+              "$id": "https://open-metadata.org/schema/security/credentials/gcpValues.json",
+              "$schema": "http://json-schema.org/draft-07/schema#",
+              "type": "object",
+              "javaType": "org.openmetadata.schema.security.credentials.GCPValues",
+              "title": "GCP Credentials Values",
+              "description": "Pass the raw credential values provided by GCP",
+              "definitions": {
+                "singleProjectId": {
+                  "title": "Single Project ID",
+                  "type": "string"
+                },
+                "multipleProjectId": {
+                  "title": "Multiple Project ID",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "properties": {
+                "type": {
+                  "title": "Credentials Type",
+                  "description": "Google Cloud Platform account type.",
+                  "type": "string"
+                },
+                "projectId": {
+                  "title": "Project ID",
+                  "description": "Project ID",
+                  "oneOf": [
+                    {
+                      "title": "Single Project ID",
+                      "type": "string"
+                    },
+                    {
+                      "title": "Multiple Project ID",
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  ]
+                },
+                "privateKeyId": {
+                  "title": "Private Key ID",
+                  "description": "Google Cloud private key id.",
+                  "type": "string"
+                },
+                "privateKey": {
+                  "title": "Private Key",
+                  "description": "Google Cloud private key.",
+                  "type": "string",
+                  "format": "password"
+                },
+                "clientEmail": {
+                  "title": "Client Email",
+                  "description": "Google Cloud email.",
+                  "type": "string"
+                },
+                "clientId": {
+                  "title": "Client ID",
+                  "description": "Google Cloud Client ID.",
+                  "type": "string"
+                },
+                "authUri": {
+                  "title": "Authentication URI",
+                  "description": "Google Cloud auth uri.",
+                  "type": "string",
+                  "format": "uri",
+                  "default": "https://accounts.google.com/o/oauth2/auth"
+                },
+                "tokenUri": {
+                  "title": "Token URI",
+                  "description": "Google Cloud token uri.",
+                  "type": "string",
+                  "format": "uri",
+                  "default": "https://oauth2.googleapis.com/token"
+                },
+                "authProviderX509CertUrl": {
+                  "title": "Authentication Provider x509 Certificate URL",
+                  "description": "Google Cloud auth provider certificate.",
+                  "type": "string",
+                  "format": "uri",
+                  "default": "https://www.googleapis.com/oauth2/v1/certs"
+                },
+                "clientX509CertUrl": {
+                  "title": "Client x509 Certificate URL",
+                  "description": "Google Cloud client certificate uri.",
+                  "type": "string",
+                  "format": "uri"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "title": "GCP Credentials Path",
+              "description": "Pass the path of file containing the GCP credentials info",
+              "type": "string"
+            }
+          ]
+        },
+        "gcpImpersonateServiceAccount": {
+          "title": "GCP Impersonate Service Account Configuration",
+          "description": "we enable the authenticated service account to impersonate another service account",
+          "type": "object",
+          "properties": {
+            "impersonateServiceAccount": {
+              "title": "Target Service Account Email",
+              "description": "The impersonated service account email",
+              "type": "string"
+            },
+            "lifetime": {
+              "title": "Lifetime",
+              "description": "Number of seconds the delegated credential should be valid",
+              "type": "integer",
+              "default": 3600
+            }
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "gcpConfig"
+      ]
+    },
+    "connectionOptions": {
+      "title": "Connection Options",
+      "javaType": "org.openmetadata.schema.services.connections.database.ConnectionOptions",
+      "description": "Additional connection options to build the URL that can be sent to service during the connection.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "connectionArguments": {
+      "title": "Connection Arguments",
+      "javaType": "org.openmetadata.schema.services.connections.database.ConnectionArguments",
+      "description": "Additional connection arguments such as security or protocol configs that can be sent to service during connection.",
+      "type": "object",
+      "additionalProperties": {
+        ".{1,}": {
+          "type": "string"
+        }
+      }
+    },
+    "supportsMetadataExtraction": {
+      "title": "Supports Metadata Extraction",
+      "description": "Supports Metadata Extraction.",
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "credentials"
+  ]
+}

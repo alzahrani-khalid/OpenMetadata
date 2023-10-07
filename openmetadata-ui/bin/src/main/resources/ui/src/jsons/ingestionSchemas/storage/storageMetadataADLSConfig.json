@@ -1,0 +1,76 @@
+{
+  "$id": "https://open-metadata.org/schema/metadataIngestion/storage/storageMetadataS3Config.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Storage Metadata ADLS Config",
+  "description": "Storage Metadata Manifest file ADLS path config.",
+  "javaType": "org.openmetadata.schema.metadataIngestion.storage.StorageMetadataADLSConfig",
+  "type": "object",
+  "properties": {
+    "securityConfig": {
+      "title": "S3 Security Config",
+      "$id": "https://open-metadata.org/schema/security/credentials/azureCredentials.json",
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "description": "Azure Datalake Credentials",
+      "type": "object",
+      "javaType": "org.openmetadata.schema.security.credentials.AzureCredentials",
+      "properties": {
+        "clientId": {
+          "title": "Client ID",
+          "description": "Your Service Principal App ID (Client ID)",
+          "type": "string"
+        },
+        "clientSecret": {
+          "title": "Client Secret",
+          "description": "Your Service Principal Password (Client Secret)",
+          "type": "string",
+          "format": "password"
+        },
+        "tenantId": {
+          "title": "Tenant ID",
+          "description": "Tenant ID of your Azure Subscription",
+          "type": "string"
+        },
+        "accountName": {
+          "title": "Account Name",
+          "description": "Account Name of your storage account",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "clientId",
+        "clientSecret",
+        "tenantId",
+        "accountName"
+      ]
+    },
+    "prefixConfig": {
+      "title": "Storage Metadata Prefix Config",
+      "$id": "https://open-metadata.org/schema/metadataIngestion/storage/storageBucketDetails.json",
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "description": "Details of the bucket where the storage metadata manifest file is stored",
+      "javaType": "org.openmetadata.schema.metadataIngestion.storage.StorageMetadataBucketDetails",
+      "type": "object",
+      "properties": {
+        "containerName": {
+          "title": "Storage Metadata Container Name",
+          "description": "Name of the top level container where the storage metadata file is stored",
+          "type": "string"
+        },
+        "objectPrefix": {
+          "title": "Storage Metadata Object Prefix",
+          "description": "Path of the folder where the storage metadata file is stored. If the file is at the root, you can keep it empty.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "containerName"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "prefixConfig"
+  ]
+}

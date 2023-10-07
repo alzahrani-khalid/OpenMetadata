@@ -1,0 +1,148 @@
+{
+  "$id": "https://open-metadata.org/schema/entity/services/connections/database/databricksConnection.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DatabricksConnection",
+  "description": "Databricks Connection Config",
+  "type": "object",
+  "javaType": "org.openmetadata.schema.services.connections.database.DatabricksConnection",
+  "definitions": {
+    "databricksType": {
+      "description": "Service type.",
+      "type": "string",
+      "enum": [
+        "Databricks"
+      ],
+      "default": "Databricks"
+    },
+    "databricksScheme": {
+      "description": "SQLAlchemy driver scheme options.",
+      "type": "string",
+      "enum": [
+        "databricks+connector"
+      ],
+      "default": "databricks+connector"
+    }
+  },
+  "properties": {
+    "type": {
+      "title": "Service Type",
+      "description": "Service Type",
+      "default": "Databricks",
+      "type": "string",
+      "enum": [
+        "Databricks"
+      ]
+    },
+    "scheme": {
+      "title": "Connection Scheme",
+      "description": "SQLAlchemy driver scheme options.",
+      "default": "databricks+connector",
+      "type": "string",
+      "enum": [
+        "databricks+connector"
+      ]
+    },
+    "hostPort": {
+      "title": "Host and Port",
+      "description": "Host and port of the Databricks service.",
+      "type": "string"
+    },
+    "token": {
+      "title": "Token",
+      "description": "Generated Token to connect to Databricks.",
+      "type": "string",
+      "format": "password"
+    },
+    "httpPath": {
+      "title": "Http Path",
+      "description": "Databricks compute resources URL.",
+      "type": "string"
+    },
+    "catalog": {
+      "title": "Catalog",
+      "description": "Catalog of the data source(Example: hive_metastore). This is optional parameter, if you would like to restrict the metadata reading to a single catalog. When left blank, OpenMetadata Ingestion attempts to scan all the catalog.",
+      "type": "string"
+    },
+    "databaseSchema": {
+      "title": "Database Schema",
+      "description": "Database Schema of the data source. This is optional parameter, if you would like to restrict the metadata reading to a single schema. When left blank, OpenMetadata Ingestion attempts to scan all the schemas.",
+      "type": "string"
+    },
+    "connectionTimeout": {
+      "title": "Connection Timeout",
+      "description": "The maximum amount of time (in seconds) to wait for a successful connection to the data source. If the connection attempt takes longer than this timeout period, an error will be returned.",
+      "type": "integer",
+      "default": 120
+    },
+    "useUnityCatalog": {
+      "title": "Use Unity Catalog",
+      "description": "Use unity catalog for fetching the metadata instead of using the hive metastore",
+      "type": "boolean",
+      "default": false
+    },
+    "connectionOptions": {
+      "title": "Connection Options",
+      "javaType": "org.openmetadata.schema.services.connections.database.ConnectionOptions",
+      "description": "Additional connection options to build the URL that can be sent to service during the connection.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "connectionArguments": {
+      "title": "Connection Arguments",
+      "javaType": "org.openmetadata.schema.services.connections.database.ConnectionArguments",
+      "description": "Additional connection arguments such as security or protocol configs that can be sent to service during connection.",
+      "type": "object",
+      "additionalProperties": {
+        ".{1,}": {
+          "type": "string"
+        }
+      }
+    },
+    "supportsUsageExtraction": {
+      "description": "Supports Usage Extraction.",
+      "type": "boolean",
+      "default": true
+    },
+    "supportsLineageExtraction": {
+      "description": "Supports Lineage Extraction.",
+      "type": "boolean",
+      "default": true
+    },
+    "supportsDBTExtraction": {
+      "description": "Supports DBT Extraction.",
+      "type": "boolean",
+      "default": true
+    },
+    "supportsMetadataExtraction": {
+      "title": "Supports Metadata Extraction",
+      "description": "Supports Metadata Extraction.",
+      "type": "boolean",
+      "default": true
+    },
+    "supportsProfiler": {
+      "title": "Supports Profiler",
+      "description": "Supports Profiler",
+      "type": "boolean",
+      "default": true
+    },
+    "supportsDatabase": {
+      "title": "Supports Database",
+      "description": "The source service supports the database concept in its hierarchy",
+      "type": "boolean",
+      "default": true
+    },
+    "supportsQueryComment": {
+      "title": "Supports Query Comment",
+      "description": "For Database Services using SQLAlchemy, True to enable running a comment for all queries run from OpenMetadata.",
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "hostPort",
+    "token"
+  ]
+}

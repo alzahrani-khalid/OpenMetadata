@@ -13,6 +13,7 @@
 
 import { InitOptions } from 'i18next';
 import { map, upperCase } from 'lodash';
+import arSA from '../../locale/languages/ar-sa.json';
 import deDe from '../../locale/languages/de-de.json';
 import enUS from '../../locale/languages/en-us.json';
 import esES from '../../locale/languages/es-es.json';
@@ -31,12 +32,15 @@ export enum SupportedLocales {
   Español = 'es-ES',
   Русский = 'ru-RU',
   Deutsh = 'de-DE',
+  العربية = 'ar-SA',
 }
 
 export const languageSelectOptions = map(SupportedLocales, (value, key) => ({
   label: `${key} - ${upperCase(value.split('-')[0])}`,
   key: value,
 }));
+
+export const RTL_LANGUAGES = ['ar-SA'];
 
 // Returns i18next options
 export const getInitOptions = (): InitOptions => {
@@ -51,6 +55,7 @@ export const getInitOptions = (): InitOptions => {
       'es-ES': { translation: esES },
       'ru-RU': { translation: ruRU },
       'de-DE': { translation: deDe },
+      'ar-SA': { translation: arSA },
     },
     fallbackLng: ['en-US'],
     detection: {
@@ -66,3 +71,6 @@ export const getInitOptions = (): InitOptions => {
     saveMissing: true, // Required for missing key handler
   };
 };
+
+export const isLanguageRTL = (languageCode: string) =>
+  RTL_LANGUAGES.includes(languageCode);

@@ -14,12 +14,21 @@
 import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
-import { getInitOptions } from './i18nextUtil';
+import { getInitOptions, isLanguageRTL } from './i18nextUtil';
 
 // Initialize i18next (language)
 i18n
   .use(LanguageDetector) // Detects system language
   .use(initReactI18next)
   .init(getInitOptions());
+
+// Listen to language changes and adjust the document's direction accordingly
+i18n.on('languageChanged', (language) => {
+  if (isLanguageRTL(language)) {
+    document.documentElement.setAttribute('dir', 'rtl');
+  } else {
+    document.documentElement.setAttribute('dir', 'ltr');
+  }
+});
 
 export default i18n;

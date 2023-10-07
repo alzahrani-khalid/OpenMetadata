@@ -1,0 +1,173 @@
+{
+  "$id": "https://open-metadata.org/schema/entity/services/connections/database/datalake/gcsConfig.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GCSConfig",
+  "description": "DataLake GCS storage will ingest metadata of files",
+  "type": "object",
+  "javaType": "org.openmetadata.schema.services.connections.database.datalake.GCSConfig",
+  "properties": {
+    "securityConfig": {
+      "title": "DataLake GCS Security Config",
+      "$id": "https://open-metadata.org/schema/security/credentials/gcpCredentials.json",
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "description": "GCP credentials configs.",
+      "type": "object",
+      "javaType": "org.openmetadata.schema.security.credentials.GCPCredentials",
+      "definitions": {
+        "gcpCredentialsPath": {
+          "title": "GCP Credentials Path",
+          "description": "Pass the path of file containing the GCP credentials info",
+          "type": "string"
+        },
+        "GCPImpersonateServiceAccountValues": {
+          "title": "GCP impersonate service account values",
+          "description": "Pass the values to impersonate a service account of Google Cloud",
+          "type": "object",
+          "properties": {
+            "impersonateServiceAccount": {
+              "title": "Target Service Account Email",
+              "description": "The impersonated service account email",
+              "type": "string"
+            },
+            "lifetime": {
+              "title": "Lifetime",
+              "description": "Number of seconds the delegated credential should be valid",
+              "type": "integer",
+              "default": 3600
+            }
+          }
+        }
+      },
+      "properties": {
+        "gcpConfig": {
+          "title": "GCP Credentials Configuration",
+          "description": "We support two ways of authenticating to GCP i.e via GCP Credentials Values or GCP Credentials Path",
+          "oneOf": [
+            {
+              "$id": "https://open-metadata.org/schema/security/credentials/gcpValues.json",
+              "$schema": "http://json-schema.org/draft-07/schema#",
+              "type": "object",
+              "javaType": "org.openmetadata.schema.security.credentials.GCPValues",
+              "title": "GCP Credentials Values",
+              "description": "Pass the raw credential values provided by GCP",
+              "definitions": {
+                "singleProjectId": {
+                  "title": "Single Project ID",
+                  "type": "string"
+                },
+                "multipleProjectId": {
+                  "title": "Multiple Project ID",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "properties": {
+                "type": {
+                  "title": "Credentials Type",
+                  "description": "Google Cloud Platform account type.",
+                  "type": "string"
+                },
+                "projectId": {
+                  "title": "Project ID",
+                  "description": "Project ID",
+                  "oneOf": [
+                    {
+                      "title": "Single Project ID",
+                      "type": "string"
+                    },
+                    {
+                      "title": "Multiple Project ID",
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  ]
+                },
+                "privateKeyId": {
+                  "title": "Private Key ID",
+                  "description": "Google Cloud private key id.",
+                  "type": "string"
+                },
+                "privateKey": {
+                  "title": "Private Key",
+                  "description": "Google Cloud private key.",
+                  "type": "string",
+                  "format": "password"
+                },
+                "clientEmail": {
+                  "title": "Client Email",
+                  "description": "Google Cloud email.",
+                  "type": "string"
+                },
+                "clientId": {
+                  "title": "Client ID",
+                  "description": "Google Cloud Client ID.",
+                  "type": "string"
+                },
+                "authUri": {
+                  "title": "Authentication URI",
+                  "description": "Google Cloud auth uri.",
+                  "type": "string",
+                  "format": "uri",
+                  "default": "https://accounts.google.com/o/oauth2/auth"
+                },
+                "tokenUri": {
+                  "title": "Token URI",
+                  "description": "Google Cloud token uri.",
+                  "type": "string",
+                  "format": "uri",
+                  "default": "https://oauth2.googleapis.com/token"
+                },
+                "authProviderX509CertUrl": {
+                  "title": "Authentication Provider x509 Certificate URL",
+                  "description": "Google Cloud auth provider certificate.",
+                  "type": "string",
+                  "format": "uri",
+                  "default": "https://www.googleapis.com/oauth2/v1/certs"
+                },
+                "clientX509CertUrl": {
+                  "title": "Client x509 Certificate URL",
+                  "description": "Google Cloud client certificate uri.",
+                  "type": "string",
+                  "format": "uri"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "title": "GCP Credentials Path",
+              "description": "Pass the path of file containing the GCP credentials info",
+              "type": "string"
+            }
+          ]
+        },
+        "gcpImpersonateServiceAccount": {
+          "title": "GCP Impersonate Service Account Configuration",
+          "description": "we enable the authenticated service account to impersonate another service account",
+          "type": "object",
+          "properties": {
+            "impersonateServiceAccount": {
+              "title": "Target Service Account Email",
+              "description": "The impersonated service account email",
+              "type": "string"
+            },
+            "lifetime": {
+              "title": "Lifetime",
+              "description": "Number of seconds the delegated credential should be valid",
+              "type": "integer",
+              "default": 3600
+            }
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "gcpConfig"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

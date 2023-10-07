@@ -568,7 +568,7 @@
                       </table>
                       <#if tierObj.tierMap?size gt 0>
                         <div style="height: 20px; line-height: 20px; font-size: 18px;">&nbsp;</div>
-                        <table width="90%" style="border: 1px solid #e2e2e2; font-family: Poppins, sans-serif;">
+                        <table width="90%" style="border: 1px solid #e2e2e2; font-family: Tajawal, sans-serif;">
                           <tr style="border: 1px solid #cccccc;">
                             <td style="padding: 10px;margin: 10px; font-size: 18px; font-weight: bold;border: 1px solid #cccccc;" align="center">Tier Type</td>
                             <td style="padding: 10px;margin: 10px; font-size: 18px; font-weight: bold;border: 1px solid #cccccc;" align="center">Percentage</td>
@@ -584,7 +584,7 @@
                         </table>
                       </#if>
                       <div style="height: 20px; line-height: 20px; font-size: 18px;">&nbsp;</div>
-                      <a target="_blank" href="#" style="background-color: #7147e8;font-size: 16px;font-weight: normal;line-height: 45px;width: 345px;color: #ffffff;border-radius: 4px;display: inline-block;font-family: Poppins, sans-serif;text-align: center;text-decoration: none;-webkit-text-size-adjust: none;">View Detailed Report in OpenMetadata</a>
+                      <a target="_blank" href="#" style="background-color: #7147e8;font-size: 16px;font-weight: normal;line-height: 45px;width: 345px;color: #ffffff;border-radius: 4px;display: inline-block;font-family: Tajawal, sans-serif;text-align: center;text-decoration: none;-webkit-text-size-adjust: none;">View Detailed Report in OpenMetadata</a>
                       <!--[if (gte mso 9)|(IE)]>
 																				</td>
 																			</tr>

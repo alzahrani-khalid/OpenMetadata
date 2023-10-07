@@ -1,0 +1,112 @@
+{
+  "$id": "https://open-metadata.org/schema/metadataIngestion/databaseServiceProfilerPipeline.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DatabaseServiceProfilerPipeline",
+  "description": "DatabaseService Profiler Pipeline Configuration.",
+  "type": "object",
+  "definitions": {
+    "profilerConfigType": {
+      "description": "Profiler Source Config Pipeline type",
+      "type": "string",
+      "enum": [
+        "Profiler"
+      ],
+      "default": "Profiler"
+    }
+  },
+  "properties": {
+    "type": {
+      "description": "Pipeline type",
+      "$ref": "#/definitions/profilerConfigType",
+      "default": "Profiler"
+    },
+    "schemaFilterPattern": {
+      "description": "Regex to only fetch tables or databases that matches the pattern.",
+      "$ref": "#/properties/tableFilterPattern",
+      "title": "Schema Filter Pattern"
+    },
+    "tableFilterPattern": {
+      "description": "Regex exclude tables or databases that matches the pattern.",
+      "title": "Table Filter Pattern",
+      "type": "object",
+      "javaType": "org.openmetadata.schema.metadataIngestion.FilterPattern",
+      "properties": {
+        "includes": {
+          "description": "List of strings/regex patterns to match and include only database entities that match.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "excludes": {
+          "description": "List of strings/regex patterns to match and exclude only database entities that match.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      },
+      "additionalProperties": false
+    },
+    "databaseFilterPattern": {
+      "description": "Regex to only fetch databases that matches the pattern.",
+      "$ref": "#/properties/tableFilterPattern",
+      "title": "Database Filter Pattern"
+    },
+    "includeViews": {
+      "description": "Optional configuration to turn off fetching metadata for views.",
+      "type": "boolean",
+      "default": true,
+      "title": "Include Views"
+    },
+    "processPiiSensitive": {
+      "description": "Optional configuration to automatically tag columns that might contain sensitive information",
+      "type": "boolean",
+      "default": false,
+      "title": "Auto Tag PII"
+    },
+    "confidence": {
+      "description": "Set the Confidence value for which you want the column to be marked",
+      "type": "number",
+      "default": 80,
+      "title": "Confidence"
+    },
+    "generateSampleData": {
+      "description": "Option to turn on/off generating sample data.",
+      "type": "boolean",
+      "default": true,
+      "title": "Generate Sample Data"
+    },
+    "profileSample": {
+      "description": "Percentage of data or no. of rows we want to execute the profiler and tests on",
+      "type": "number",
+      "default": null,
+      "title": "Profile Sample"
+    },
+    "profileSampleType": {
+      "title": "Profile Sample Type",
+      "description": "Type of Profile Sample (percentage or rows)",
+      "type": "string",
+      "enum": [
+        "PERCENTAGE",
+        "ROWS"
+      ],
+      "default": "PERCENTAGE"
+    },
+    "threadCount": {
+      "description": "Number of threads to use during metric computations",
+      "type": "number",
+      "default": 5,
+      "title": "Thread Count"
+    },
+    "timeoutSeconds": {
+      "description": "Profiler Timeout in Seconds",
+      "type": "integer",
+      "default": 43200,
+      "title": "Timeout (in sec.)"
+    }
+  },
+  "additionalProperties": false
+}

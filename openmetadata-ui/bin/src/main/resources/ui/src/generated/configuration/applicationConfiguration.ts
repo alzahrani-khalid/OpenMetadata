@@ -1,0 +1,53 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/*
+ *  Copyright 2021 Collate
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
+ /**
+ * This schema defines the Application Configuration.
+ */
+export interface ApplicationConfiguration {
+    loginConfig?: LoginConfiguration;
+    logoConfig?:  LogoConfiguration;
+}
+
+/**
+ * This schema defines the Login Configuration
+ */
+export interface LoginConfiguration {
+    /**
+     * Access Block time for user on exceeding failed attempts(in seconds)
+     */
+    accessBlockTime?: number;
+    /**
+     * Jwt Token Expiry time for login in seconds
+     */
+    jwtTokenExpiryTime?: number;
+    /**
+     * Failed Login Attempts allowed for user.
+     */
+    maxLoginFailAttempts?: number;
+}
+
+/**
+ * This schema defines the Logo Configuration
+ */
+export interface LogoConfiguration {
+    /**
+     * Login Page Logo Image Url
+     */
+    customLogoUrlPath?: string;
+    /**
+     * Navigation Bar Logo Image Url
+     */
+    customMonogramUrlPath?: string;
+}

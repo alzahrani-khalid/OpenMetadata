@@ -194,7 +194,7 @@ const SigninPage = () => {
   const onClickForgotPassword = () => history.push(ROUTES.FORGOT_PASSWORD);
 
   return (
-    <div className="d-flex flex-col h-full bg-white">
+    <div className="d-flex flex-col h-full bg-pink">
       <Row className="flex flex-grow" data-testid="signin-page">
         <Col span={8}>
           <div

@@ -1,0 +1,131 @@
+{
+  "$id": "https://open-metadata.org/schema/entity/services/connections/database/mongoDBConnection.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MongoDBConnection",
+  "description": "MongoDB Connection Config",
+  "type": "object",
+  "javaType": "org.openmetadata.schema.services.connections.database.MongoDBConnection",
+  "definitions": {
+    "mongoDBType": {
+      "description": "Service type.",
+      "type": "string",
+      "enum": [
+        "MongoDB"
+      ],
+      "default": "MongoDB"
+    },
+    "MongoConnectionString": {
+      "type": "object",
+      "javaType": "org.openmetadata.schema.services.connections.database.mongo.MongoConnectionString",
+      "title": "Mongo Connection String",
+      "properties": {
+        "connectionURI": {
+          "title": "Connection URI",
+          "description": "Connection URI to connect to your MongoDB cluster",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "properties": {
+    "type": {
+      "title": "Service Type",
+      "description": "Service Type",
+      "default": "MongoDB",
+      "type": "string",
+      "enum": [
+        "MongoDB"
+      ]
+    },
+    "connectionDetails": {
+      "title": "MongoDB Connection Details",
+      "description": "MongoDB Connection Details.",
+      "oneOf": [
+        {
+          "$id": "https://open-metadata.org/schema/entity/services/connections/database/datalake/azureConfig.json",
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "title": "Mongo Connection Values",
+          "description": "Azure Datalake Storage will ingest files in container",
+          "type": "object",
+          "javaType": "org.openmetadata.schema.services.connections.database.mongo.MongoConnectionValues",
+          "definitions": {
+            "mongoDBScheme": {
+              "description": "Mongo connection scheme options.",
+              "type": "string",
+              "enum": [
+                "mongodb",
+                "mongodb+srv"
+              ],
+              "default": "mongodb"
+            }
+          },
+          "properties": {
+            "scheme": {
+              "title": "Connection Scheme",
+              "description": "Mongo connection scheme options.",
+              "default": "mongodb",
+              "type": "string",
+              "enum": [
+                "mongodb",
+                "mongodb+srv"
+              ]
+            },
+            "username": {
+              "title": "Username",
+              "description": "Username to connect to MongoDB. This user should have privileges to read all the metadata in MongoDB.",
+              "type": "string"
+            },
+            "password": {
+              "title": "Password",
+              "description": "Password to connect to MongoDB.",
+              "type": "string",
+              "format": "password"
+            },
+            "hostPort": {
+              "title": "Host and Port",
+              "description": "Host and port of the MongoDB service.",
+              "type": "string"
+            },
+            "connectionOptions": {
+              "title": "Connection Options",
+              "javaType": "org.openmetadata.schema.services.connections.database.ConnectionOptions",
+              "description": "Additional connection options to build the URL that can be sent to service during the connection.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "hostPort"
+          ]
+        },
+        {
+          "type": "object",
+          "javaType": "org.openmetadata.schema.services.connections.database.mongo.MongoConnectionString",
+          "title": "Mongo Connection String",
+          "properties": {
+            "connectionURI": {
+              "title": "Connection URI",
+              "description": "Connection URI to connect to your MongoDB cluster",
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "databaseName": {
+      "title": "Database Name",
+      "description": "Optional name to give to the database in OpenMetadata. If left blank, we will use default as the database name.",
+      "type": "string"
+    },
+    "supportsMetadataExtraction": {
+      "title": "Supports Metadata Extraction",
+      "description": "Supports Metadata Extraction.",
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "additionalProperties": false
+}
